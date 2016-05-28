@@ -5,8 +5,8 @@
   "engineFactory": "org.template.RecommendationEngine",
   "datasource": {
     "params" : {
-      "name": "sample-handmade-data.txt",
-      "appName": "macys",
+      "name": "handmade-search-data",
+      "appName": "personalized-search",
       "eventNames": ["add-to-basket", "search"]
     }
   },
@@ -23,12 +23,12 @@
       "comment": "simplest setup where all values are default, popularity based backfill, must add eventsNames",
       "name": "ur",
       "params": {
-        "appName": "macys",
+        "appName": "personalized-search",
         "indexName": "urindex",
         "typeName": "items",
         "comment": "must have data for the first event or the model will not build, other events are optional",
         "eventNames": ["add-to-basket", "search"],
-        "modelFilename": "macys-search"
+        "modelFilename": "personalized-search"
       }
     }
   ]
