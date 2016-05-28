@@ -6,8 +6,8 @@
   "datasource": {
     "params" : {
       "name": "sample-handmade-data.txt",
-      "appName": "handmade",
-      "eventNames": ["purchase", "view"]
+      "appName": "macys",
+      "eventNames": ["add-to-basket", "search"]
     }
   },
   "sparkConf": {
@@ -23,11 +23,12 @@
       "comment": "simplest setup where all values are default, popularity based backfill, must add eventsNames",
       "name": "ur",
       "params": {
-        "appName": "handmade",
+        "appName": "macys",
         "indexName": "urindex",
         "typeName": "items",
         "comment": "must have data for the first event or the model will not build, other events are optional",
-        "eventNames": ["purchase", "view"]
+        "eventNames": ["add-to-basket", "search"],
+        "modelFilename": "macys-search"
       }
     }
   ]

@@ -28,7 +28,7 @@ import org.apache.mahout.sparkbindings.indexeddataset.IndexedDatasetSpark
 import org.apache.spark.rdd.RDD
 import org.joda.time.DateTime
 import org.json4s
-import org.json4s.JsonAST
+import org.json4s.{DefaultFormats, JsonAST}
 import org.json4s.JsonAST._
 import scala.collection.JavaConverters._
 import scala.collection.immutable
@@ -131,6 +131,7 @@ case class URAlgorithmParams(
   expireDateName: Option[String] = None,
   // used as the subject of a dateRange in queries, specifies the name of the item property
   dateName: Option[String] = None,
+  modelFilename: Option[String] = None, // Set to some-file.csv to output the model as csv
   seed: Option[Long] = None) // seed is not used presently
   extends Params //fixed default make it reproducible unless supplied
 
@@ -227,6 +228,7 @@ class URAlgorithm(val ap: URAlgorithmParams)
       dateNames,
       typeMappings = Some(nonDefaultMappings))
     model.save(ap)
+
     new NullModel
   }
 

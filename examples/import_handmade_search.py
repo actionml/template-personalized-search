@@ -10,7 +10,7 @@ import pytz
 
 FIELDS_DELIMITER = "\t"
 PROPERTIES_DELIMITER = ","
-PRIMARY_EVENT = "add_to_basket"
+PRIMARY_EVENT = "add-to-basket"
 SEARCH_EVENT = "search"
 SEED = 1
 
@@ -32,7 +32,7 @@ def import_events(client, file):
 
     for line in f:
         # get 3 fields
-        data = line.translate(None, '"[]').split(FIELDS_DELIMITER)
+        data = line.translate(None, '"[]\r\n').split(FIELDS_DELIMITER)
         user_id = data[0]
         search_phrases = data[1].rsplit(PROPERTIES_DELIMITER)
         product_id = data[2]
@@ -64,7 +64,7 @@ def import_events(client, file):
             current_date += event_time_increment
         count += 1
     f.close()
-    print "%s events are imported." % count
+    print "%s lines are imported." % count
 
 
 if __name__ == '__main__':

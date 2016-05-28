@@ -10,7 +10,6 @@ libraryDependencies ++= Seq(
   "io.prediction"    %% "core" % pioVersion.value % "provided",
   "org.apache.spark" %% "spark-core" % "1.4.0" % "provided",
   "org.apache.spark" %% "spark-mllib" % "1.4.0" % "provided",
-  "org.xerial.snappy" % "snappy-java" % "1.1.1.7",
   // Mahout's Spark libs
   "org.apache.mahout" %% "mahout-math-scala" % mahoutVersion,
   "org.apache.mahout" %% "mahout-spark" % mahoutVersion
