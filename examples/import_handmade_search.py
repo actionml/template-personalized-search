@@ -37,32 +37,33 @@ def import_events(client, file):
         search_phrases = data[1].rsplit(PROPERTIES_DELIMITER)
         product_id = data[2]
 
-        if (product_id != "NULL"):
-            client.create_event(
-                event=PRIMARY_EVENT,
-                entity_type="user",
-                entity_id=user_id,
-                target_entity_type="item",
-                target_entity_id=product_id,
-                event_time = current_date
-            )
-            print "Event: " + PRIMARY_EVENT + " entity_id: " + user_id + " target_entity_id: " + product_id + \
-                  " current_date: " + current_date.isoformat()
-            current_date += event_time_increment
+        if (user_id != "cookie_id"): # column id line, first in file usually
+            if (product_id != "NULL"): # search phases are collected, add-to-basket are not
+                client.create_event(
+                    event=PRIMARY_EVENT,
+                    entity_type="user",
+                    entity_id=user_id,
+                    target_entity_type="item",
+                    target_entity_id=product_id,
+                    event_time = current_date
+                )
+                #print "Event: " + PRIMARY_EVENT + " entity_id: " + user_id + " target_entity_id: " + product_id + \
+                #      " current_date: " + current_date.isoformat()
+                current_date += event_time_increment
 
-        for phrase in search_phrases:  # assumes other event type is 'view'
-            client.create_event(
-                event=SEARCH_EVENT,
-                entity_type="user",
-                entity_id=user_id,
-                target_entity_type="item",  # type of item in this action
-                target_entity_id=phrase,
-                event_time = current_date
-            )
-            print "Event: " + SEARCH_EVENT + " entity_id: " + user_id + " target_entity_id: " + phrase + \
-                  " current_date: " + current_date.isoformat()
-            current_date += event_time_increment
-        count += 1
+            for phrase in search_phrases: # search phases are collected, add-to-basket are not
+                client.create_event(
+                    event=SEARCH_EVENT,
+                    entity_type="user",
+                    entity_id=user_id,
+                    target_entity_type="item",
+                    target_entity_id=phrase,
+                    event_time = current_date
+                )
+                #print "Event: " + SEARCH_EVENT + " entity_id: " + user_id + " target_entity_id: " + phrase + \
+                #      " current_date: " + current_date.isoformat()
+                current_date += event_time_increment
+            count += 1
     f.close()
     print "%s lines are imported." % count
 
