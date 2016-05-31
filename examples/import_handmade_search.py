@@ -72,14 +72,16 @@ if __name__ == '__main__':
     parser.add_argument('--access_key', default='invald_access_key')
     parser.add_argument('--url', default="http://localhost:7070")
     parser.add_argument('--file', default="./data/sample-handmade-data.txt")
+    parser.add_argument('--output', default="./data/ps-out.json")
 
     args = parser.parse_args()
     print args
 
-    client = predictionio.EventClient(
-        access_key=args.access_key,
-        url=args.url,
-        threads=5,
-        qsize=500
-    )
+#    client = predictionio.EventClient(
+#        access_key=args.access_key,
+#        url=args.url,
+#        threads=5,
+#        qsize=500
+#    )
+    client = predictionio.FileExporter(args.output)
     import_events(client, args.file)
